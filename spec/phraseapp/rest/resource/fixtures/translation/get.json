@@ -1,0 +1,28 @@
+{
+  "id": "abcd1234cdef1234abcd1234cdef1234",
+  "content": "My translation",
+  "unverified": false,
+  "excluded": false,
+  "plural_suffix": "",
+  "key": {
+    "id": "abcd1234cdef1234abcd1234cdef1234",
+    "name": "home.index.headline",
+    "plural": false
+  },
+  "locale": {
+    "id": "abcd1234cdef1234abcd1234cdef1234",
+    "name": "de",
+    "code": "de-DE"
+  },
+  "placeholders": [
+    "%{count}"
+  ],
+  "created_at": "2015-01-28T09:52:53Z",
+  "updated_at": "2015-01-28T09:52:53Z",
+  "user": {
+    "id": "abcd1234cdef1234abcd1234cdef1234",
+    "username": "joe.doe",
+    "name": "Joe Doe"
+  },
+  "word_count": 2
+}
