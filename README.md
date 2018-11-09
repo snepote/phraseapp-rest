@@ -1,5 +1,7 @@
 # phraseapp-rest
 
+[![Build Status](https://travis-ci.org/snepote/phraseapp-rest.svg?branch=master)](https://travis-ci.org/snepote/phraseapp-rest)
+
 ## Requirements
 - Create a read-only token at Phraseapp
 - Set the ENVVAR `PHRASEAPP_API_KEY` with the token value
