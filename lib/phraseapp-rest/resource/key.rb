@@ -16,7 +16,7 @@ module Phraseapp
         end
 
         def get(key_id:)
-          raise raise "implement me!, key_id=#{key_id}"
+          raise "implement me!, key_id=#{key_id}"
         end
       end
     end

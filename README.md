@@ -24,3 +24,5 @@ locale.list.each do |l|
   puts "#{l.id} #{l.updated_at} #{l.name} #{l.code}"
 end
 ```
+## Phraseapp Api reference
+https://developers.phraseapp.com/api/
