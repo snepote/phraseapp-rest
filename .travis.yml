@@ -1,0 +1,21 @@
+dist: trusty
+sudo: required
+
+language: ruby
+cache: bundler
+rvm:
+  - 2.3.7
+
+bundler_args: --without production
+
+script:
+  - bundle exec rubocop
+  - bundle exec rspec spec
+
+notifications:
+  email: "snepote@gmail.com"
+
+# safelist
+branches:
+  only:
+  - master
