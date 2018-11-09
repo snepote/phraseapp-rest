@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../lib/phraseapp/rest/resource/project'
+require_relative '../../../lib/phraseapp-rest/resource/project'
 require_relative 'api_client_mock'
 
 RSpec.describe Phraseapp::Rest::Resource::Project do

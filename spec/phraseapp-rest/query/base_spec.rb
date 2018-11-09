@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../lib/phraseapp/rest/query/base'
+require_relative '../../../lib/phraseapp-rest/query/base'
 
 RSpec.describe Phraseapp::Rest::Query::Base do
   subject { described_class }

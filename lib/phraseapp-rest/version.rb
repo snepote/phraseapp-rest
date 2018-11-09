@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 module Phraseapp
   module Rest
-    VERSION = '2.1.0'
+    VERSION = '0.0.1'
   end
 end

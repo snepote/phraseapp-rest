@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../lib/phraseapp/rest/factory.rb'
+require_relative '../../lib/phraseapp-rest/factory.rb'
 
 RSpec.describe Phraseapp::Rest::Factory do
   subject { described_class }

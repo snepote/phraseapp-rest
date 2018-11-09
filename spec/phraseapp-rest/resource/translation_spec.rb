@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'time'
-require_relative '../../../../lib/phraseapp/rest/resource/translation'
+require_relative '../../../lib/phraseapp-rest/resource/translation'
 require_relative 'api_client_mock'
 
 RSpec.describe Phraseapp::Rest::Resource::Translation do
