@@ -1,6 +1,7 @@
 AllCops:
   Exclude:
     - 'run.rb'
+    - 'all.rb'
   TargetRubyVersion: 2.4
 Layout/DefEndAlignment:
   AutoCorrect: true
@@ -21,7 +22,7 @@ Naming/FileName:
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#snake-case-files
   Enabled: false
 Rails:
-  Enabled: true
+  Enabled: false
 Style/Alias:
   EnforcedStyle: prefer_alias_method
 Style/AsciiComments:
