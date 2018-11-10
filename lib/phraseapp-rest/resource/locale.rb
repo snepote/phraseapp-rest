@@ -15,8 +15,8 @@ module Phraseapp
           @path = "/projects/#{project_id}/locales"
         end
 
-        def get(locale_id:)
-          raise "implement me!, locale_id=#{locale_id}"
+        def get(id:)
+          parse(@client.get("#{@path}/#{id}"))
         end
       end
     end

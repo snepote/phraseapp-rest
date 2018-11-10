@@ -10,6 +10,16 @@ RSpec.describe Phraseapp::Rest::Resource::Locale do
   let(:project_id) { 'project_id' }
   let(:api) { double('Api') }
 
+  it 'returns one locale for the given id' do
+    allow(api).to receive(:get)
+      .with("/projects/#{project_id}/locales/abcd1234cdef1234abcd1234cdef1234")
+      .and_return(ApiClientMock.fixture(resource_type, 'get.json'))
+
+    locale = subject.get(id: 'abcd1234cdef1234abcd1234cdef1234')
+    expect(locale.id).to eq 'abcd1234cdef1234abcd1234cdef1234'
+    expect(locale.name).to eq 'de'
+  end
+
   it 'returns a list of two locales' do
     allow(api).to receive(:get).with("/projects/#{project_id}/locales").and_return(
       ApiClientMock.fixture(resource_type, 'list.json')

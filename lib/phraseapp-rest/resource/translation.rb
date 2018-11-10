@@ -14,8 +14,8 @@ module Phraseapp
           @path = "/projects/#{project_id}"
         end
 
-        def get(translation_id:)
-          raise "implement me!, translation_id=#{translation_id}"
+        def get(id:)
+          parse(@client.get("#{@path}/translations/#{id}"))
         end
 
         def list

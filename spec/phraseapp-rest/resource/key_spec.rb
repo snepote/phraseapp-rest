@@ -9,6 +9,16 @@ RSpec.describe Phraseapp::Rest::Resource::Key do
   let(:project_id) { 'project_id' }
   let(:api) { double('Api') }
 
+  it 'returns one key for the given id' do
+    allow(api).to receive(:get)
+      .with("/projects/#{project_id}/keys/abcd1234cdef1234abcd1234cdef1234")
+      .and_return(ApiClientMock.fixture(resource_type, 'get.json'))
+
+    key = subject.get(id: 'abcd1234cdef1234abcd1234cdef1234')
+    expect(key.id).to eq 'abcd1234cdef1234abcd1234cdef1234'
+    expect(key.name).to eq 'home.index.headline'
+  end
+
   it 'returns a list of two keys' do
     allow(api).to receive(:get).with("/projects/#{project_id}/keys").and_return(
       ApiClientMock.fixture(resource_type, 'list.json')
