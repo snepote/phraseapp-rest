@@ -23,7 +23,7 @@ blocks:
             - bundle install --deployment
             - cache store bundle-$(checksum Gemfile.lock) vendor/bundle
 
-  - name: rubocop
+  - name: tests
     task:
       prologue:
         commands:
@@ -33,20 +33,20 @@ blocks:
         - name: BUNDLE_PATH
           value: vendor/bundle
       jobs:
-        - name: Test all the things
-          commands:
-            - bundle exec rubocop
-
-  - name: rspec
-    task:
-      prologue:
-        commands:
-          - checkout
-          - cache restore bundle-$(checksum Gemfile.lock)
-      env_vars:
-        - name: BUNDLE_PATH
-          value: vendor/bundle
-      jobs:
-        - name: Test all the things
+        - name: rspec
           commands:
             - bundle exec rspec spec
+
+  - name: lint
+    task:
+      prologue:
+        commands:
+          - checkout
+          - cache restore bundle-$(checksum Gemfile.lock)
+      env_vars:
+        - name: BUNDLE_PATH
+          value: vendor/bundle
+      jobs:
+        - name: rubocop
+          commands:
+            - bundle exec rubocop            
