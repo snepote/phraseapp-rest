@@ -20,7 +20,7 @@ blocks:
           commands:
             - checkout
             - cache restore bundle-$(checksum Gemfile.lock)
-            - bundle install --deployment
+            - bundle install --without production
             - cache store bundle-$(checksum Gemfile.lock) vendor/bundle
 
   - name: tests
@@ -33,6 +33,8 @@ blocks:
         - name: BUNDLE_PATH
           value: vendor/bundle
       jobs:
+        - name: bundle install
+          commands: bundle install --without production
         - name: rspec
           commands:
             - bundle exec rspec spec
@@ -47,6 +49,8 @@ blocks:
         - name: BUNDLE_PATH
           value: vendor/bundle
       jobs:
+        - name: bundle install
+          commands: bundle install --without production        
         - name: rubocop
           commands:
-            - bundle exec rubocop            
+            - bundle exec rubocop
