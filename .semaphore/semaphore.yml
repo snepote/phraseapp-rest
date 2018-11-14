@@ -37,18 +37,3 @@ blocks:
         - name: rspec
           commands:
             - bundle exec rspec spec
-
-  - name: lint
-    task:
-      prologue:
-        commands:
-          - checkout
-          - cache restore bundle-$(checksum Gemfile.lock)
-          - bundle install --without production
-      env_vars:
-        - name: BUNDLE_PATH
-          value: vendor/bundle
-      jobs:
-        - name: rubocop
-          commands:
-            - bundle exec rubocop
