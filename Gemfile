@@ -2,8 +2,6 @@
 
 source 'https://rubygems.org'
 
-ruby '2.3.7'
-
 gem 'phraseapp-ruby', '~> 2.1'
 gem 'rest-client',    '~> 2.0', '>= 2.0.2'
 
