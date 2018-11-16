@@ -34,6 +34,17 @@ blocks:
         - name: BUNDLE_PATH
           value: vendor/bundle
       jobs:
-        - name: rspec
+        - name: rspec 01
           commands:
+            - ruby -e 't = 10;puts "begin sleep #{t.to_s}";sleep t;puts "end sleep #{t}"'
+            - bundle exec rspec spec
+      jobs:
+        - name: rspec 02
+          commands:
+            - ruby -e 't = 15;puts "begin sleep #{t.to_s}";sleep t;puts "end sleep #{t}"'
+            - bundle exec rspec spec
+      jobs:
+        - name: rspec 03
+          commands:
+            - ruby -e 't = 20;puts "begin sleep #{t.to_s}";sleep t;puts "end sleep #{t}"'
             - bundle exec rspec spec
