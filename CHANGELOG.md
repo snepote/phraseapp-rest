@@ -8,7 +8,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Gem configuration block
 
-################## TODO: make sure 404 for non existing resource is different than no results
-
 ## [0.1.0] - 2018-11-11
 ### First version

@@ -4,12 +4,12 @@
 
 ## Requirements
 - Create a read-only token at Phraseapp
-- Set the ENVVAR `PHRASEAPP_API_KEY` with the token value
+- Set an ENVVAR with `YOUR_PHRASEAPP_API_KEY`
 
 ## Configuration
 ```ruby
 Phraseapp::Rest.configure do |config|
-  config.token = ENV['PHRASEAPP_API_KEY']
+  config.token = ENV['YOUR_PHRASEAPP_API_KEY']
 end
 ```
 
