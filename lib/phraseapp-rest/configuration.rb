@@ -3,7 +3,17 @@
 module Phraseapp
   module Rest
     class Configuration
-      attr_accessor :token
+      attr_writer :token
+
+      def initialize
+        @token = nil
+      end
+
+      def token
+        raise 'Phraseapp api token not defined' if @token.nil?
+
+        @token
+      end
     end
   end
 end

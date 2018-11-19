@@ -12,10 +12,6 @@ require_relative 'phraseapp-rest/resource/translation'
 
 module Phraseapp
   module Rest
-    class << self
-      attr_accessor :configuration
-    end
-
     def self.configuration
       @configuration ||= Configuration.new
     end
@@ -26,6 +22,6 @@ module Phraseapp
 
     def self.configure
       yield(configuration)
-    end    
+    end
   end
 end
