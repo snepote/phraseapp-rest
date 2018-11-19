@@ -2,6 +2,8 @@
 
 module Phraseapp
   module Rest
-    VERSION = '0.2.0'
+    class Configuration
+      attr_accessor :token
+    end
   end
 end
