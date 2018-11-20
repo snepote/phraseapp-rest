@@ -10,13 +10,14 @@ module Phraseapp
       end
 
       def get(path)
-        response @client::Request.execute(
+        rsp, err = @client::Request.execute(
           url: "#{BASE_URL}#{path}",
           method: :get,
           user: @token,
           content_type: :json, accept: :json,
           verify_ssl: TRUE
         )
+        rsp
       rescue RestClient::ExceptionWithResponse => e
         return '[]' if e.response = 404
 
