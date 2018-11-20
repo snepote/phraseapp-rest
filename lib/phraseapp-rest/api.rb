@@ -14,19 +14,13 @@ module Phraseapp
           url: "#{BASE_URL}#{path}",
           method: :get,
           user: @token,
-          content_type: :json,
-          accept: :json,
+          content_type: :json, accept: :json,
           verify_ssl: TRUE
         )
-      end
+      rescue RestClient::ExceptionWithResponse => e
+        return '[]' if e.response = 404
 
-      private
-
-      def response(call)
-        rsp, err = call
-        raise err.inspect if err
-
-        rsp
+        raise e
       end
     end
   end
