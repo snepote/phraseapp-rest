@@ -15,6 +15,6 @@ Gem::Specification.new do |s|
   s.email       = 'snepote@gmail.com'
   s.files       = `git ls-files ./lib`.split($RS)
   s.homepage    = 'https://rubygems.org/gems/phraseapp-rest'
-  s.metadata    = { source_code_uri: 'https://github.com/snepote/phraseapp-rest' }
+  s.metadata    = { 'source_code_uri' => 'https://github.com/snepote/phraseapp-rest' }
   s.license     = 'MIT'
 end
