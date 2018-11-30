@@ -1,12 +1,15 @@
 # frozen_string_literal: true
 
+require_relative 'resource/response'
+
 module Phraseapp
   module Rest
     class Api
       BASE_URL = 'https://api.phraseapp.com/api/v2'
-      def initialize(rest_client: client, token: access_token)
+      def initialize(rest_client:, token:, response: Resource::Response.new)
         @client = rest_client
         @token = token
+        @response = response
       end
 
       def get(path)
@@ -17,11 +20,20 @@ module Phraseapp
           content_type: :json, accept: :json,
           verify_ssl: TRUE
         )
-        rsp
-      rescue RestClient::ExceptionWithResponse => e
-        return '[]' if e.response = 404
+        return format(rsp.headers, rsp.code, rsp.body)
+      rescue @client::ExceptionWithResponse => e
+        return format({}, 404, '[]') if e.response.code == 404
 
         raise e
+      end
+
+      private
+
+      def format(headers, code, body)
+        @response.header = headers
+        @response.code = code
+        @response.body = body
+        @response
       end
     end
   end
