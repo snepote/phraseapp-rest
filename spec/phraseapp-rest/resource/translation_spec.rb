@@ -1,58 +1,49 @@
 # frozen_string_literal: true
 
-require 'time'
 require_relative '../../../lib/phraseapp-rest/resource/translation'
+require_relative '../../../lib/phraseapp-rest/resource/response'
+require_relative '../../../lib/phraseapp-rest/resource/parser'
 require_relative 'api_client_mock'
 
 RSpec.describe Phraseapp::Rest::Resource::Translation do
   subject { described_class.new(client: api, project_id: project_id) }
   let(:resource_type) { described_class.to_s.split('::').last.downcase }
   let(:project_id) { 'project_id' }
+  let(:locale_id) { 'locale_id' }
   let(:api) { double('Api') }
+  let(:parser) { Phraseapp::Rest::Resource::Parser }
 
   it 'returns one translation for the given id' do
     allow(api).to receive(:get)
       .with("/projects/#{project_id}/translations/abcd1234cdef1234abcd1234cdef1234")
-      .and_return(ApiClientMock.fixture(resource_type, 'get.json'))
-
-    translation = subject.get(id: 'abcd1234cdef1234abcd1234cdef1234')
-    expect(translation.id).to eq 'abcd1234cdef1234abcd1234cdef1234'
-    expect(translation.content).to eq 'My translation'
+      .and_return(
+        Phraseapp::Rest::Resource::Response.new(
+          code: 200,
+          body: ApiClientMock.fixture(resource_type, 'get.json')
+        )
+      )
+    translation = parser.parse(subject.get(id: 'abcd1234cdef1234abcd1234cdef1234').body)
+    expect(translation[:id]).to eq 'abcd1234cdef1234abcd1234cdef1234'
+    expect(translation[:content]).to eq 'My translation'
   end
 
   it 'returns a list of two translations' do
-    allow(api).to receive(:get).with("/projects/#{project_id}/translations").and_return(
-      ApiClientMock.fixture(resource_type, 'list.json')
+    allow(api).to receive(:get).with("/projects/#{project_id}/translations?page=1&per_page=25").and_return(
+      Phraseapp::Rest::Resource::Response.new(
+        code: 200,
+        body: ApiClientMock.fixture(resource_type, 'list.json')
+      )
     )
-    expect(subject.list.count).to eq 2
+    expect(parser.parse(subject.list.body).count).to eq 2
   end
 
-  #
-  # it 'returns nothing where there project or locale does not exists' do
-  #   allow(api).to receive(:get).with("/projects/#{project_id}/translations").and_return('{}')
-  #   expect(subject.new(client: api, project_id: project_id).list).to be_empty
-  # end
-
-  # it 'returns all translations when no time is provided' do
-  #   expect(subject.get(locale: 'de_DE').count).to eq 2
-  # end
-  #
-  # it 'returns one translation when only was updated after the time requested' do
-  #   translations = subject.get(locale: 'de_DE', updated_after: Time.parse('2018-10-27 12:00:00 +0200'))
-  #   expect(translations.count).to eq 1
-  #   expect(translations.first['key']).to eq 'some.other.key'
-  # end
-  #
-  # it 'returns nothing when last translation was before now' do
-  #   expect(subject.get(locale: 'de_DE', updated_after: Time.now).count).to eq 0
-  # end
-  #
-  # it 'filters time correctly when using different time zones' do
-  #   translations = subject.get(locale: 'en_AU', updated_after: Time.parse('2018-10-27 12:00:00 +0200'))
-  #   expect(translations.count).to eq 1
-  #   expect(translations.first['key']).to eq 'number.one'
-  #
-  #   translations = subject.get(locale: 'en_AU', updated_after: Time.parse('2018-10-28 05:00:00 +0100'))
-  #   expect(translations.count).to eq 0
-  # end
+  it 'returns a list of translatons filtered by locale' do
+    allow(api).to receive(:get).with("/projects/#{project_id}/locales/#{locale_id}/translations?page=1&per_page=25").and_return(
+      Phraseapp::Rest::Resource::Response.new(
+        code: 200,
+        body: ApiClientMock.fixture(resource_type, 'list_by_locale.json')
+      )
+    )
+    expect(parser.parse(subject.list_by_locale(locale_id: locale_id).body).count).to eq 2
+  end
 end
