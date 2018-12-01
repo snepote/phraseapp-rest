@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'page'
+require_relative 'parser'
 
 module Phraseapp
   module Rest
@@ -14,19 +15,19 @@ module Phraseapp
         end
 
         def get(id:)
-          @client.get("#{@path}/translations/#{id}")
+          Parser.parse(@client.get("#{@path}/translations/#{id}"))
         end
 
         def list(page: Resource::Page.new)
           path = "#{@path}/translations"
           path += querystring(page: page)
-          @client.get(path)
+          Parser.parse(@client.get(path))
         end
 
         def list_by_locale(locale_id:, param: nil, query: nil, page: Resource::Page.new)
           path = "#{@path}/locales/#{locale_id}/translations"
           path += querystring(param: param, query: query, page: page)
-          @client.get(path)
+          Parser.parse(@client.get(path))
         end
 
         private

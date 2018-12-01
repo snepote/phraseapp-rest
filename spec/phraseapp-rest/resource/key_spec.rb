@@ -12,8 +12,8 @@ RSpec.describe Phraseapp::Rest::Resource::Key do
   it 'returns one key for the given id' do
     allow(api).to receive(:get)
       .with("/projects/#{project_id}/keys/abcd1234cdef1234abcd1234cdef1234")
-      .and_return(ApiClientMock.resource(resource_type, 'get.json'))
-    key = subject.get(id: 'abcd1234cdef1234abcd1234cdef1234').body
+      .and_return(ApiClientMock.fixture(resource_type, 'get.json'))
+    key = subject.get(id: 'abcd1234cdef1234abcd1234cdef1234')
     expect(key[:id]).to eq 'abcd1234cdef1234abcd1234cdef1234'
     expect(key[:name]).to eq 'home.index.headline'
   end
@@ -21,15 +21,15 @@ RSpec.describe Phraseapp::Rest::Resource::Key do
   it 'returns a list of two keys' do
     allow(api).to receive(:get)
       .with("/projects/#{project_id}/keys")
-      .and_return(ApiClientMock.resource(resource_type, 'list.json'))
-    expect(subject.list.body.count).to eq 2
+      .and_return(ApiClientMock.fixture(resource_type, 'list.json'))
+    expect(subject.list.count).to eq 2
   end
 
   it 'returns a list of locales updated after a date' do
     allow(api).to receive(:get)
       .with("/projects/#{project_id}/keys")
-      .and_return(ApiClientMock.resource(resource_type, 'list.json'))
+      .and_return(ApiClientMock.fixture(resource_type, 'list.json'))
     certain_date = Time.parse('2015-01-28T09:54:53Z')
-    expect(subject.list(updated_after: certain_date).body.count).to eq 1
+    expect(subject.list(updated_after: certain_date).count).to eq 1
   end
 end

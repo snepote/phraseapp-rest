@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'list'
+require_relative 'parser'
 
 module Phraseapp
   module Rest
@@ -14,7 +15,7 @@ module Phraseapp
         end
 
         def get(id:)
-          @client.get("#{@path}/#{id}")
+          Parser.parse(@client.get("#{@path}/#{id}"))
         end
       end
     end
