@@ -10,7 +10,7 @@ module Phraseapp
         end
 
         def to_s
-          "page=#{@number.to_s}&per_page=#{@size}"
+          "page=#{@number}&per_page=#{@size}"
         end
       end
     end

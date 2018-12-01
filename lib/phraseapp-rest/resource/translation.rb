@@ -31,10 +31,8 @@ module Phraseapp
 
         private
 
-        def querystring(param: nil, query: nil, page: page)
-          str = [param, query, page].compact.map do |param|
-            param.to_s
-          end.join('&')
+        def querystring(param: nil, query: nil, page:)
+          str = [param, query, page].compact.map(&:to_s).join('&')
           "?#{str}" unless str.empty?
         end
       end

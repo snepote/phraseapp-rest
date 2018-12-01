@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'resource/response'
+require_relative 'resource/parser'
 
 module Phraseapp
   module Rest
@@ -13,14 +14,13 @@ module Phraseapp
       end
 
       def get(path)
-        rsp, err = @client::Request.execute(
+        rsp, _err = @client::Request.execute(
           url: "#{BASE_URL}#{path}",
           method: :get,
           user: @token,
-          content_type: :json, accept: :json,
-          verify_ssl: TRUE
+          content_type: :json, accept: :json, verify_ssl: TRUE
         )
-        return format(rsp.headers, rsp.code, rsp.body)
+        format(rsp.headers, rsp.code, rsp.body)
       rescue @client::ExceptionWithResponse => e
         return format({}, 404, '[]') if e.response.code == 404
 
@@ -32,7 +32,7 @@ module Phraseapp
       def format(headers, code, body)
         @response.header = headers
         @response.code = code
-        @response.body = body
+        @response.body = Phraseapp::Rest::Resource::Parser.parse(body)
         @response
       end
     end
