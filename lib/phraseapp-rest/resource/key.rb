@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
-require_relative 'parser'
 require_relative 'list'
+require_relative 'parser'
 
 module Phraseapp
   module Rest
     module Resource
       class Key
-        include Parser
         include List
 
         def initialize(client:, project_id:)
@@ -16,7 +15,7 @@ module Phraseapp
         end
 
         def get(id:)
-          parse(@client.get("#{@path}/#{id}"))
+          Parser.parse(@client.get("#{@path}/#{id}"))
         end
       end
     end

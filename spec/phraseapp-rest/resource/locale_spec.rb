@@ -14,23 +14,22 @@ RSpec.describe Phraseapp::Rest::Resource::Locale do
     allow(api).to receive(:get)
       .with("/projects/#{project_id}/locales/abcd1234cdef1234abcd1234cdef1234")
       .and_return(ApiClientMock.fixture(resource_type, 'get.json'))
-
     locale = subject.get(id: 'abcd1234cdef1234abcd1234cdef1234')
-    expect(locale.id).to eq 'abcd1234cdef1234abcd1234cdef1234'
-    expect(locale.name).to eq 'de'
+    expect(locale[:id]).to eq 'abcd1234cdef1234abcd1234cdef1234'
+    expect(locale[:name]).to eq 'de'
   end
 
   it 'returns a list of two locales' do
-    allow(api).to receive(:get).with("/projects/#{project_id}/locales").and_return(
-      ApiClientMock.fixture(resource_type, 'list.json')
-    )
+    allow(api).to receive(:get)
+      .with("/projects/#{project_id}/locales")
+      .and_return(ApiClientMock.fixture(resource_type, 'list.json'))
     expect(subject.list.count).to eq 2
   end
 
   it 'returns a list of locales updated after a date' do
-    allow(api).to receive(:get).with("/projects/#{project_id}/locales").and_return(
-      ApiClientMock.fixture(resource_type, 'list.json')
-    )
+    allow(api).to receive(:get)
+      .with("/projects/#{project_id}/locales")
+      .and_return(ApiClientMock.fixture(resource_type, 'list.json'))
     certain_date = Time.parse('2015-01-28T09:54:53Z')
     expect(subject.list(updated_after: certain_date).count).to eq 1
   end

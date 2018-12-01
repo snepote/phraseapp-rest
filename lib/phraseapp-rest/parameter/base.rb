@@ -22,10 +22,16 @@ module Phraseapp
 
         def to_s
           hash = {}
-          %w(branch sort order).each do |attr|
+          params.each do |attr|
             hash[attr.to_sym] = send(attr) unless send(attr).nil?
           end
           hash.to_a.map { |x| "#{x[0]}=#{x[1]}" }.join('&').to_s
+        end
+
+        protected
+
+        def params
+          %w(branch sort order)
         end
       end
     end

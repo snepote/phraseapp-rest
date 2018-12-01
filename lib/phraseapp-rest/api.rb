@@ -4,22 +4,21 @@ module Phraseapp
   module Rest
     class Api
       BASE_URL = 'https://api.phraseapp.com/api/v2'
-      def initialize(rest_client: client, token: access_token)
+      def initialize(rest_client:, token:)
         @client = rest_client
         @token = token
       end
 
       def get(path)
-        rsp, err = @client::Request.execute(
+        rsp, _err = @client::Request.execute(
           url: "#{BASE_URL}#{path}",
           method: :get,
           user: @token,
-          content_type: :json, accept: :json,
-          verify_ssl: TRUE
+          content_type: :json, accept: :json, verify_ssl: TRUE
         )
-        rsp
-      rescue RestClient::ExceptionWithResponse => e
-        return '[]' if e.response = 404
+        rsp.body
+      rescue @client::ExceptionWithResponse => e
+        return '[]' if e.response.code == 404
 
         raise e
       end
