@@ -6,6 +6,12 @@
 - Create a read-only token at Phraseapp
 - Set an ENVVAR with `YOUR_PHRASEAPP_API_KEY`
 
+## Notes and disclaimer
+It's important to mention that all the resources that supports paginations uses the default Phraseapp pagination (page:1, per_page: 25) but explicitly declared as a default value of the Page object.
+
+** Disclaimer **
+Keep in mind that Phraseapp do not recommend to user the lists to retrieve all the items but to use the "#locale_download" instead. The limits of how many items per page are supported, has not been tested.
+
 ## Configuration
 ```ruby
 Phraseapp::Rest.configure do |config|

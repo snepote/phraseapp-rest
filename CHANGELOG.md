@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Translations supports now pagination
 - Locale download
 
+### Changed
+- IMPORTANT: removed the json cast to OpenStruct due to a [bug in Oj](https://github.com/ohler55/oj/issues/239) which ignores the ```object_class``` parameter and create conflicts specially on some Rails applications. Now always returns a Hash
+
 ## [0.2.0] - 2018-11-20
 ### Added
 - Gem configuration block
