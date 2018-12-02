@@ -4,7 +4,7 @@
 
 require 'time'
 require 'benchmark'
-require_relative '../lib/phraseapp-rest'
+require 'phraseapp-rest'
 
 Phraseapp::Rest.configure do |config|
   config.token = ENV['PHRASEAPP_API_KEY']
