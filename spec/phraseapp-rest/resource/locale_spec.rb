@@ -21,16 +21,18 @@ RSpec.describe Phraseapp::Rest::Resource::Locale do
 
   it 'returns a list of two locales' do
     allow(api).to receive(:get)
-      .with("/projects/#{project_id}/locales")
-      .and_return(ApiClientMock.fixture(resource_type, 'list.json'))
-    expect(subject.list.count).to eq 2
+      .with("/projects/#{project_id}/locales").and_return(ApiClientMock.fixture(resource_type, 'list.json'))
+    expect(subject.list.count).to eq 3
   end
 
-  it 'returns a list of locales updated after a date' do
+  it 'returns a list of locales filtered by names' do
     allow(api).to receive(:get)
-      .with("/projects/#{project_id}/locales")
-      .and_return(ApiClientMock.fixture(resource_type, 'list.json'))
-    certain_date = Time.parse('2015-01-28T09:54:53Z')
-    expect(subject.list(updated_after: certain_date).count).to eq 1
+      .with("/projects/#{project_id}/locales").and_return(ApiClientMock.fixture(resource_type, 'list.json'))
+    expect(subject.list(names: %w(ch fr)).count).to eq 2
+    expect(subject.list(names: 'de').count).to eq 1
+  end
+
+  describe '.download' do
+    it 'method is implemented but the test is'
   end
 end

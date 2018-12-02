@@ -1,7 +1,4 @@
 AllCops:
-  Exclude:
-    - 'run.rb'
-    - 'all.rb'
   TargetRubyVersion: 2.4
 Layout/DefEndAlignment:
   AutoCorrect: true
@@ -17,6 +14,11 @@ Lint/Debugger:
 Metrics/LineLength:
   Enabled: false
   Max: 100
+Metrics/BlockLength:
+  Enabled: true
+  Max: 25
+  Exclude:
+    - 'spec/**/*'
 Naming/FileName:
   Description: Use snake_case for source file names.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#snake-case-files
