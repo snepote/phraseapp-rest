@@ -21,8 +21,28 @@
   },
   {
     "id": "abcd1234cdef1234abcd1234cdef1234",
-    "name": "de",
-    "code": "de-DE",
+    "name": "ch",
+    "code": "de-CH",
+    "default": true,
+    "main": false,
+    "rtl": false,
+    "plural_forms": [
+      "zero",
+      "one",
+      "other"
+    ],
+    "source_locale": {
+      "id": "abcd1234cdef1234abcd1234cdef1234",
+      "name": "en",
+      "code": "en-GB"
+    },
+    "created_at": "2015-01-28T09:52:53Z",
+    "updated_at": "2015-01-28T09:55:53Z"
+  },
+  {
+    "id": "abcd1234cdef1234abcd1234cdef1234",
+    "name": "fr",
+    "code": "fr-FR",
     "default": true,
     "main": false,
     "rtl": false,
