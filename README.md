@@ -47,7 +47,8 @@ end
 ```ruby
 Phraseapp::Rest::Resource::Project.new(client: api).list.each do |project|
   puts "[project] #{project[:id]} #{project[:updated_at]} #{project[:name]}"
-  Phraseapp::Rest::Resource::Locale.new(client: api, project_id: project[:id]).list.each do |locale|
+  locales = Phraseapp::Rest::Resource::Locale.new(client: api, project_id: project[:id])
+  locales.list.each do |locale|
     puts "  [locale] #{locale[:id]} #{locale[:updated_at]} #{locale[:name]}"
     puts locales.download(id: locale[:id])
   end
