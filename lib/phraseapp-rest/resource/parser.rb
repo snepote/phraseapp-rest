@@ -6,7 +6,7 @@ module Phraseapp
   module Rest
     module Resource
       module Parser
-        OPTIONS = { max_nesting: 4, symbolize_names: TRUE }.freeze
+        OPTIONS = { max_nesting: 4, symbolize_names: true }.freeze
 
         def self.parse(json)
           JSON.parse(json, OPTIONS)
