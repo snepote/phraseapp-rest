@@ -46,7 +46,7 @@ module Phraseapp
         private
 
         def set(bool)
-          message = "#{caller(1..1).first} error '#{bool}' is not supported. Please use TRUE or FALSE"
+          message = "#{caller(1..1).first} error '#{bool}' is not supported. Please use true or false"
           raise message unless [true, false].include? bool
 
           bool.to_s

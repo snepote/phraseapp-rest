@@ -14,7 +14,7 @@ module Phraseapp
           url: "#{BASE_URL}#{path}",
           method: :get,
           user: @token,
-          content_type: :json, accept: :json, verify_ssl: TRUE
+          content_type: :json, accept: :json, verify_ssl: true
         )
         rsp.body
       rescue @client::ExceptionWithResponse => e

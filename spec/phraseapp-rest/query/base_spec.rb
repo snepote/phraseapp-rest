@@ -19,7 +19,7 @@ RSpec.describe Phraseapp::Rest::Query::Base do
         id: 'some_random_id',
         tags: 'nice,cool,music',
         unverified: false,
-        excluded: TRUE,
+        excluded: true,
         updated_at: '>=2013-02-21T00:00:00Z'
       ).to_s
     ).to eq querystring
