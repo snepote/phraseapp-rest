@@ -32,6 +32,13 @@ RSpec.describe Phraseapp::Rest::Resource::Locale do
     expect(subject.list(names: 'de').count).to eq 1
   end
 
+  it 'returns page 2 of locales with 50 items per page filtered by names' do
+    allow(api).to receive(:get)
+      .with("/projects/#{project_id}/locales?page=2&per_page=50").and_return(ApiClientMock.fixture(resource_type, 'list.json'))
+    page = Phraseapp::Rest::Resource::Page.new(number: 2, size: 50)
+    expect(subject.list(names: 'de', page: page).count).to eq 1
+  end
+
   describe '.download' do
     it 'method is implemented but the test is'
   end
