@@ -4,7 +4,7 @@
 
 ## Requirements
 - Create a read-only token at Phraseapp
-- Set an ENVVAR with `YOUR_PHRASEAPP_API_KEY`
+- Set an ENVVAR with `PHRASEAPP_API_KEY`
 
 ## Notes
 It's important to mention that all the resources that supports paginations uses the default Phraseapp pagination (page:1, per_page: 25) but explicitly declared as a default value of the Page object.
@@ -18,7 +18,7 @@ Keep in mind that Phraseapp do not recommend to user the lists to retrieve all t
 ## Configuration
 ```ruby
 Phraseapp::Rest.configure do |config|
-  config.token = ENV['YOUR_PHRASEAPP_API_KEY']
+  config.token = ENV['PHRASEAPP_API_KEY']
 end
 ```
 
@@ -80,6 +80,15 @@ projects.list(updated_after: last_update).each do |project|
       puts "    #{t[:id]} #{t[:updated_at]} #{t[:key][:name]}"
     end
   end
+end
+```
+
+### Return all locales for the first 50 projects
+```ruby
+page = Phraseapp::Rest::Resource::Page.new(size: 50)
+Phraseapp::Rest::Resource::Project.new(client: api).list(page: page).each do |project|
+  locales = Phraseapp::Rest::Resource::Locale.new(client: api, project_id: project[:id])
+  puts "#{project[:name]} #{locales.list.group_by{ |l| l[:name] }.keys.join(' ')}"
 end
 ```
 
