@@ -9,7 +9,7 @@ module Phraseapp
     module Resource
       module List
         def list(updated_after: nil, names: [], page: nil)
-          path = @path + ("&#{page}" unless page.nil?).to_s
+          path = @path + ("?#{page}" unless page.nil?).to_s
           items = Parser.parse(@client.get(path))
           items = remove_when(items, updated_after) unless updated_after.nil?
           items = filter_by(items, names) unless names.empty?

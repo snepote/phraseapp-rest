@@ -26,6 +26,14 @@ RSpec.describe Phraseapp::Rest::Resource::Project do
     expect(subject.list(updated_after: certain_date).count).to eq 1
   end
 
+  it 'returns the page 2 of size 100 of a list of projects' do
+    allow(api).to receive(:get)
+      .with('/projects?page=2&per_page=100')
+      .and_return(ApiClientMock.fixture(resource_type, 'list.json'))
+    page = Phraseapp::Rest::Resource::Page.new(number: 2, size: 100)
+    expect(subject.list(page: page).count).to eq 2
+  end
+
   it 'returns nothing when project does not exists' do
     allow(api).to receive(:get).with('/projects/non_existing_project').and_return('[]')
     expect(subject.get(id: 'non_existing_project')).to be_empty
