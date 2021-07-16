@@ -4,10 +4,9 @@ sudo: required
 language: ruby
 cache: bundler
 rvm:
-  - 2.3.8
   - 2.4.6
   - 2.5.5
-  - 2.6.1
+  - 2.6.6
 
 before_install:
   - gem install bundler -v 1.16.2
