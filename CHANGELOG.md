@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.3] - 2021-07-16
+### Fixed
+- Bump addressable from 2.5.2 to 2.8.0 to solve CVE-2021-32740
+
 ## [0.4.2] - 2019-11-20
 ### Fixed
 - Fixed /projects when paginated
